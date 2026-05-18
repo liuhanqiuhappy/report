@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园学习助手</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>📅 日程管理</h2>
+                <button class="collapse-btn" id="collapse-btn">›</button>
+            </div>
+            
+            <div class="sidebar-content">
+                <!-- 今日课程 -->
+                <section class="sidebar-section">
+                    <h3 class="section-title">
+                        <span class="icon">📚</span>
+                        <span>今日课程</span>
+                    </h3>
+                    <div class="course-list" id="course-list">
+                        <div class="empty-state">暂无课程</div>
+                    </div>
+                </section>
+
+                <!-- 待办事项 -->
+                <section class="sidebar-section">
+                    <h3 class="section-title">
+                        <span class="icon">✅</span>
+                        <span>待办事项</span>
+                        <span class="task-count" id="task-count">0</span>
+                    </h3>
+                    <div class="task-list" id="task-list">
+                        <div class="empty-state">暂无任务</div>
+                    </div>
+                </section>
+            </div>
+        </aside>
+
+        <!-- 侧边栏展开按钮 -->
+        <button class="expand-btn" id="expand-btn" style="display: none;">‹</button>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 聊天容器（固定居中） -->
+            <div class="chat-container">
+                <!-- 聊天头部 -->
+                <header class="chat-header">
+                    <div class="header-left">
+                        <div class="avatar">🤖</div>
+                        <div class="header-info">
+                            <h1>校园学习助手</h1>
+                            <span class="status online">在线</span>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <button class="header-btn" id="refresh-btn" title="刷新数据">🔄</button>
+                        <button class="header-btn" id="clear-btn" title="清空消息">🗑️</button>
+                    </div>
+                </header>
+
+                <!-- 消息列表 -->
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message bot-message">
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-content">
+                            <div class="message-bubble">
+                                <p>你好！我是你的校园学习助手。</p>
+                                <p>有什么我可以帮你的吗？</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 快捷指令 -->
+                <div class="quick-commands" id="quick-commands">
+                    <button class="quick-btn" onclick="sendQuickCommand('课程')">📅 今日课程</button>
+                    <button class="quick-btn" onclick="sendQuickCommand('任务')">✅ 待办事项</button>
+                    <button class="quick-btn" onclick="sendQuickCommand('计划')">📋 学习计划</button>
+                    <button class="quick-btn" onclick="sendQuickCommand('明天')">🔮 明日课程</button>
+                </div>
+
+                <!-- 输入区域 -->
+                <div class="chat-input-area">
+                    <div class="input-tools">
+                        <label class="upload-btn" for="image-upload">
+                            <span>📷</span>
+                        </label>
+                        <input type="file" id="image-upload" accept="image/*" hidden>
+                    </div>
+                    <input type="text" id="user-input" placeholder="输入消息或指令..." autocomplete="off">
+                    <button class="send-btn" id="send-btn">
+                        <span>发送</span>
+                        <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13"></path>
+                            <path d="M22 2L15 22L11 13L2 9"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- 弹窗提醒 -->
+        <div class="modal-overlay" id="modal-overlay" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title">📢 提醒</span>
+                    <button class="modal-close" id="modal-close">×</button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <p>提醒内容</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="modal-btn secondary" id="modal-snooze">稍后提醒</button>
+                    <button class="modal-btn primary" id="modal-confirm">知道了</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
